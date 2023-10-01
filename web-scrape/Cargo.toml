@@ -1,0 +1,15 @@
+[package]
+name = "web-scrape"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "web-scrape"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1.32.0", features = ["full"] }
+csv = "1.2.2"
+serde = { version = "1.0.188", features = ["derive"] }
+thirtyfour = "0.31.0"
+url = "2.4.1"
