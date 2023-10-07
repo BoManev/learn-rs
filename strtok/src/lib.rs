@@ -54,3 +54,25 @@ mod tests {
 /// ```
 #[allow(dead_code)]
 fn _bad_strtok() {}
+
+use std::marker::PhantomData;
+// owns T => it will drop T
+// however the deserializer might be drop after T is dropped => double-free
+#[allow(dead_code)]
+struct BadDeserializer<T> {
+    _t: PhantomData<T>
+}
+
+// doesn't own T => no double-free
+// however fn(T) is contravarient, which makes the deserializer hard to use
+#[allow(dead_code)]
+struct AnnoyingDeserializer<T> {
+    _t: PhantomData<fn(T)>
+}
+
+// doesn't own T => no double-free
+// fn() -> T is covarient, which makes the deserializer easy to use
+#[allow(dead_code)]
+struct GoodDeserializer<T> {
+    _t: PhantomData<fn() -> T>
+}
