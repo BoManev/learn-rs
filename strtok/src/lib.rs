@@ -1,3 +1,8 @@
+// informal way to think about variance
+// T <: U 
+// T is at least as *useful* as U
+
+
 //pub fn strtok<'a>(s: &'a mut &'a str, delimiter: char) -> &'a str {}
 // this won't work because &'a mut T is invariant over T
 // meaning it can't change the lifetime of T
